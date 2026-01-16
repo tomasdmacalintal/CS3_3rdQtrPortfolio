@@ -16,10 +16,12 @@
 
 
     <style>
+        body{
+            background-color: blanchedalmond;
+        }
         textarea{
             resize: none;
-            width: 300px;
-            height: 200px;
+            height: 250px;
         }
         .field{
             margin: 30px;
@@ -28,23 +30,36 @@
             background-color: antiquewhite;
             width: 500px;
             justify-self: center;
+            padding: 30px;
+            margin: 50px;
+            border: 2px solid wheat;
+        }
+        .shortanswer{
+            width: 100%;
+        }
+        input:focus, textarea:focus, input:hover{
+            border: 2px solid wheat;
+            outline: none;
+        }
+        .radio:hover{
+            color: darkgoldenrod;
         }
 
     </style>
 </head>
 <body>
-    <form class="form">
+    <form class="form" id="clubForm">
         <div class="field">
             <label class="label">StudentID</label>
             <div class="control">
-                <input type="number" name="q1">
+                <input type="number" name="q1" class="shortanswer" onblur="handleBlur(event)">
             </div>
         </div>
         
         <div class="field">
             <label class="label">Full Name</label>
             <div class="control">
-                <input type="text" name="q2">
+                <input type="text" name="q2" class="shortanswer" onblur="handleBlur(event)">
             </div>
         </div>
 
@@ -58,14 +73,14 @@
         <div class="field">
             <label class="label">Email Address</label>
             <div class="control">
-                <input type="email" name="q4">
+                <input type="email" name="q4" class="shortanswer" onblur="handleBlur(event)">
             </div>
         </div>
 
         <div class="field">
             <label class="label">Mobile Phone</label>
             <div class="control">
-                <input type="text" name="q5">
+                <input type="text" name="q5" class="shortanswer" onblur="handleBlur(event)">
             </div>
             
             
@@ -98,11 +113,11 @@
             <label class="label">Preferred Club</label>
             <div class="control">
                 <select>
-                    <option value="Alianti">Alianti</option>
-                    <option value="Himig Agham">Himig Agham</option>
-                    <option value="Cuerdas Agham">Cuerdas Agham</option>
-                    <option value="Ellipsis">Ellipsis</option>
-                    <option value="Labuyo">Labuyo</option>
+                    <option name="q8" value="Alianti">Alianti</option>
+                    <option name="q8" value="Himig Agham">Himig Agham</option>
+                    <option name="q8" value="Cuerdas Agham">Cuerdas Agham</option>
+                    <option name="q8" value="Ellipsis">Ellipsis</option>
+                    <option name="q8" value="Labuyo">Labuyo</option>
                 </select>
             </div>
             
@@ -111,10 +126,22 @@
         <div class="field">
             <label class="label">Why do you want to join?</label>
             <div class="control">
-                <textarea id="message" name="message" placeholder="Type your message here..."></textarea>
+                <textarea id="message" name="q9" class="shortanswer" onblur="handleBlur(event)" placeholder="Type your message here..."></textarea>
             </div>
             
         </div>
+
+        <div class="field">
+            <input type="button"/>
+        </div>
         
     </form>
+    <script>
+        function handleBlur(event){
+            if (event.target.value == "")
+                event.target.style.borderColor = "red";
+            else
+                event.target.style.borderColor = "wheat";
+        }
+    </script>
 </body>
