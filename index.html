@@ -62,7 +62,7 @@
 <body>
     <h1>CLUB REGISTRATION FORM</h1>
     <h2>Please answer this form to register for a club.</h2>
-    <form class="form" id="clubForm" method="post" action="submit">
+    <form class="form" id="clubForm" method="post" action="submit" onsubmit="submitForm(event)" onreset="clearForm(event)">
         <div class="field">
             <label class="label">StudentID</label>
             <div class="control">
@@ -148,8 +148,8 @@
         </div>
 
         <div class="line">
-            <button type="button" onclick="submitForm()">Submit</button>
-            <button type="button" onclick="clearForm()">Clear</button>
+            <input type="submit">
+            <input type="reset">
         </div>
         
     </form>
@@ -161,17 +161,12 @@
             else
                 event.target.style.borderColor = "wheat";
         }
-        function clearForm(){
-            if (confirm("Are you sure you want to reset?")){
-                for (i=0;i<10;i++){
-                    if (i!=6&&i!=7)
-                        formValues[i].value = "";
-                    formValues[i].style.border = "";
-                    formValues[i].checked = false;
-                }
+        function clearForm(event){
+            if (!confirm("Are you sure you want to reset?")){
+                event.preventDefault();
             }
         }
-        function submitForm(){
+        function submitForm(event){
             for (i=0;i<10;i++){
                 if (formValues[i].value == "" || formValues.q7.value == ""){
                     alert("Some parts of the form still need to be filled out!");
@@ -180,12 +175,15 @@
                             formValues[i].style.borderColor = "red";
                         }
                     }
+                    event.preventDefault();
                     return;
                 }
             }
             if (confirm("Are you sure you want to submit?")){
                 formValues.submit();
             }
+            else
+                event.preventDefault();
         }
     </script>
 </body>
