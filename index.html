@@ -19,6 +19,14 @@
         body{
             background-color: blanchedalmond;
         }
+        h1,h2{
+            color: darkgoldenrod;
+            text-align: center;
+        }
+        h1{
+            display: flexbox;
+            background-color: rgb(255, 247, 237);
+        }
         textarea{
             resize: none;
             height: 250px;
@@ -37,18 +45,24 @@
         .shortanswer{
             width: 100%;
         }
-        input:focus, textarea:focus, input:hover{
+        input:focus, textarea:focus, input:hover, textarea:hover, select:hover, select:focus{
             border: 2px solid wheat;
             outline: none;
         }
-        .radio:hover{
+        .radio:hover {
             color: darkgoldenrod;
+        }
+        .line{
+            display: flex;
+            justify-content: space-evenly;
         }
 
     </style>
 </head>
 <body>
-    <form class="form" id="clubForm">
+    <h1>CLUB REGISTRATION FORM</h1>
+    <h2>Please answer this form to register for a club.</h2>
+    <form class="form" id="clubForm" method="post" action="submit">
         <div class="field">
             <label class="label">StudentID</label>
             <div class="control">
@@ -66,7 +80,7 @@
         <div class="field">
             <label class="label">Birthday</label>
             <div class="control">
-                <input type="date" name="q3">
+                <input type="date" name="q3" onblur="handleBlur(event)">
             </div>
         </div>
 
@@ -89,7 +103,8 @@
         <div class="field">
             <label class="label">Grade Level</label>
             <div class="control">
-                <select>
+                <select onblur="handleBlur(event)">
+                    <option name="q6" value="" disabled selected hidden>Choose..</option>
                     <option name="q6" value="7">Grade 7</option>
                     <option name="q6" value="8">Grade 8</option>
                     <option name="q6" value="9">Grade 9</option>
@@ -112,7 +127,8 @@
         <div class="field">
             <label class="label">Preferred Club</label>
             <div class="control">
-                <select>
+                <select onblur="handleBlur(event)">
+                    <option name="q8" value="" disabled selected hidden>Choose..</option>
                     <option name="q8" value="Alianti">Alianti</option>
                     <option name="q8" value="Himig Agham">Himig Agham</option>
                     <option name="q8" value="Cuerdas Agham">Cuerdas Agham</option>
@@ -131,17 +147,45 @@
             
         </div>
 
-        <div class="field">
-            <button type="button">Submit</button>
+        <div class="line">
+            <button type="button" onclick="submitForm()">Submit</button>
+            <button type="button" onclick="clearForm()">Clear</button>
         </div>
         
     </form>
     <script>
+        formValues = document.getElementById("clubForm");
         function handleBlur(event){
             if (event.target.value == "")
                 event.target.style.borderColor = "red";
             else
                 event.target.style.borderColor = "wheat";
+        }
+        function clearForm(){
+            if (confirm("Are you sure you want to reset?")){
+                for (i=0;i<10;i++){
+                    if (i!=6&&i!=7)
+                        formValues[i].value = "";
+                    formValues[i].style.border = "";
+                    formValues[i].checked = false;
+                }
+            }
+        }
+        function submitForm(){
+            for (i=0;i<10;i++){
+                if (formValues[i].value == "" || formValues.q7.value == ""){
+                    alert("Some parts of the form still need to be filled out!");
+                    for (i=0;i<10;i++){
+                        if (formValues[i].value == ""){
+                            formValues[i].style.borderColor = "red";
+                        }
+                    }
+                    return;
+                }
+            }
+            if (confirm("Are you sure you want to submit?")){
+                formValues.submit();
+            }
         }
     </script>
 </body>
