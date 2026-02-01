@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- favicon -->
+
+    <!-- Encoding + mobile responsiveness -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Page info -->
+    <title>Sign Ups</title>
+    <meta name="description" content="Webpage to view the list of students who signed up.">
+    <meta name="author" content="Datu Macalintal">
+
+    <!-- Link Stylesheet -->
+
+
+    <style>
+        body{
+            background-color: blanchedalmond;
+        }
+        h1,h2{
+            color: darkgoldenrod;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        h1{
+            display: flexbox;
+            background-color: rgb(255, 247, 237);
+        }
+        table, tr, td, th{
+            border: 2px solid darkgoldenrod;
+            color: darkgoldenrod;
+        }
+    </style>
+</head>
+<body>
+    <h1>List of Students Who Signed Up</h1>
+    <a href="../index.html">Back to Sign Up</a> <br>
+    <label for="fruits">Choose a Club:</label>
+    <select name="fruits" id="fruits">
+        <option value="" disabled selected hidden>Choose..</option>
+        <option value="Alianti">All</option>
+        <option value="Alianti">Alianti</option>
+        <option value="Himig Agham">Himig Agham</option>
+        <option value="Cuerdas Agham">Cuerdas Agham</option>
+        <option value="Ellipsis">Ellipsis</option>
+        <option value="Labuyo">Labuyo</option>
+    </select>
+    <table id="table">
+        <tr>
+            <th>Club</th>
+            <th>ID</th>
+            <th>Fullname</th>
+            <th>Birthday</th>
+            <th>Grade</th>
+            <th>Email</th>
+            <th>Mobile</th>
+            <th>Intern|Extern</th>
+        </tr>
+        <tr>
+            <td>Eve</td>
+            <td>Eve</td>
+            <td>Eve</td>
+            <td>Eve</td>
+            <td>Eve</td>
+            <td>Eve</td>
+            <td>Eve</td>
+            <td>Eve</td>
+        </tr>
+    </table>
+    <script>
+        entries = JSON.parse(localStorage.getItem('entries')) || [];
+        table = document.getElementById("table");
+    </script>
+</body>

@@ -62,7 +62,7 @@
 <body>
     <h1>CLUB REGISTRATION FORM</h1>
     <h2>Please answer this form to register for a club.</h2>
-    <form class="form" id="clubForm" method="post" action="submit" onsubmit="submitForm(event)" onreset="clearForm(event)">
+    <form class="form" id="clubForm" onsubmit="submitForm(event)" onreset="clearForm(event)">
         <div class="field">
             <label class="label">StudentID</label>
             <div class="control">
@@ -103,7 +103,7 @@
         <div class="field">
             <label class="label">Grade Level</label>
             <div class="control">
-                <select onblur="handleBlur(event)">
+                <select name="q6" onblur="handleBlur(event)">
                     <option name="q6" value="" disabled selected hidden>Choose..</option>
                     <option name="q6" value="7">Grade 7</option>
                     <option name="q6" value="8">Grade 8</option>
@@ -127,7 +127,7 @@
         <div class="field">
             <label class="label">Preferred Club</label>
             <div class="control">
-                <select onblur="handleBlur(event)">
+                <select name="q8" onblur="handleBlur(event)">
                     <option name="q8" value="" disabled selected hidden>Choose..</option>
                     <option name="q8" value="Alianti">Alianti</option>
                     <option name="q8" value="Himig Agham">Himig Agham</option>
@@ -167,6 +167,7 @@
             }
         }
         function submitForm(event){
+            event.preventDefault();
             for (i=0;i<10;i++){
                 if (formValues[i].value == "" || formValues.q7.value == ""){
                     alert("Some parts of the form still need to be filled out!");
@@ -175,15 +176,25 @@
                             formValues[i].style.borderColor = "red";
                         }
                     }
-                    event.preventDefault();
                     return;
                 }
             }
             if (confirm("Are you sure you want to submit?")){
-                formValues.submit();
+                const newEntry = {
+                    id: formValues.q1.value,
+                    name: formValues.q2.value,
+                    email: formValues.q4.value,
+                    mobile: formValues.q5.value,
+                    grade: formValues.q6.value,
+                    intExt: formValues.q7.value,
+                    club: formValues.q8.value,}
+                entries = JSON.parse(localStorage.getItem('entries')) || [];
+
+                entries.push(newEntry);
+                localStorage.setItem('entries', JSON.stringify(entries));
+
+                alert("Saved!");
             }
-            else
-                event.preventDefault();
         }
     </script>
 </body>
