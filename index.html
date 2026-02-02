@@ -151,10 +151,13 @@
             <input type="submit">
             <input type="reset">
         </div>
+
+        <a href="public/viewSignUps.html"><br>View Sign Ups</a>
         
     </form>
     <script>
         formValues = document.getElementById("clubForm");
+        // make border red when not filled in
         function handleBlur(event){
             if (event.target.value == "")
                 event.target.style.borderColor = "red";
@@ -169,6 +172,7 @@
         function submitForm(event){
             event.preventDefault();
             for (i=0;i<10;i++){
+                // finds unfilled form data and prevents submission, highlights unfilled data
                 if (formValues[i].value == "" || formValues.q7.value == ""){
                     alert("Some parts of the form still need to be filled out!");
                     for (i=0;i<10;i++){
@@ -180,14 +184,18 @@
                 }
             }
             if (confirm("Are you sure you want to submit?")){
+                // saves entry and stores in local storage
                 const newEntry = {
                     id: formValues.q1.value,
                     name: formValues.q2.value,
+                    birthday: formValues.q3.value,
                     email: formValues.q4.value,
                     mobile: formValues.q5.value,
                     grade: formValues.q6.value,
                     intExt: formValues.q7.value,
-                    club: formValues.q8.value,}
+                    club: formValues.q8.value,
+                    reason: formValues.q9.value
+                }
                 entries = JSON.parse(localStorage.getItem('entries')) || [];
 
                 entries.push(newEntry);
